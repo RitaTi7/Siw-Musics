@@ -13,7 +13,7 @@
 	    <div class="logo"><img src="/images/piuma.jpg" width="2%"/> SIW Music</div>
 	    <nav>
 		  <a th:href="@{/}"><button>Home</button></a>
-	      <a th:href="@{/libro}"><button>Libri</button></a>
+	      <a th:href="@{/brano}"><button>Brani</button></a>
 	      <a th:href="@{/autori}"><button>Autori</button></a>
 		  <span th:if="${userDetails}">
 		  	<span th:text="${userDetails.username}"></span>
@@ -36,7 +36,7 @@
 	    </p>
 	
 	    <section class="evidenza">
-	      <h2>Libri in evidenza</h2>
+	      <h2>Brani in evidenza</h2>
 	      <ul class="book-list">
 	        <li>
 	          <strong>Il nome della rosa</strong>

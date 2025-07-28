@@ -27,7 +27,7 @@ public class Commento {
 	@Size(max=2000, message="Il commento non può superare i 2000 caratteri")
 	private String testo;			//cambia i vincoli di colonna ( varying 255 sono pochi)
 	
-	@NotBlank
+	
 	private String usernameUtente;
 	
 	@ManyToOne

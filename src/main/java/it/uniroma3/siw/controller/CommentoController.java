@@ -39,13 +39,16 @@ public class CommentoController {
 	}
 	
 	@PostMapping("/user/commento/{idBrano}")												//l'ordine è importante!!!!
-	public String nuovoCommento (@PathVariable("idComento") Long id, @Valid @ModelAttribute("commento") Commento commento, BindingResult bindingResult, Model model) {
+	public String nuovoCommento (@PathVariable("idBrano") Long id, @Valid @ModelAttribute("commento") Commento commento, BindingResult bindingResult, Model model) {
+		System.out.println(">>>> ENTRATO NEL POST MAPPING <<<<");
+
 		if(bindingResult.hasErrors()) {
+			System.out.println("Errore nel binding: " + bindingResult.getAllErrors());
 			model.addAttribute("brano", this.branoService.getBranoById(id));
 			return "user/formNuovoCommento.html";	
 		}
 		else {
-			
+			System.out.println("Errore nel binding: " + bindingResult.getAllErrors());
 			UserDetails userDetails= (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			Credentials credentials= this.credentialsService.getCredentials(userDetails.getUsername());
 			User user= credentials.getUser();

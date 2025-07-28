@@ -128,7 +128,7 @@ ul.elem li {
   border-left: 7px solid #2a4d69;
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(26, 42, 71, 0.09);
-  transition: background 0.25s;
+  transition: background-color 0.25s;
 }
 
 ul.elem li:hover {
@@ -164,7 +164,164 @@ ul.elem li:hover {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(42, 77, 105, 0.2);
   max-width: 93%;
-  margin-l
+  margin-left:40px;
+  margin-bottom: 20px;
+ }
+ 
+ /* Checkbox nascosto */
+ .expand-toggle {
+     display: none;
+ }
+
+ .recensioni-riquadro{
+ 	height: 250px;
+ 	overflow-y:auto;
+ 	overflow-x: hidden;
+ 	padding-right: 5px;
+ 	transition: height 0.3s ease;
+ }
+
+ /* Quando checkbox è checked, espandi */
+ .expand-toggle:checked + .recensioni-riquadro {
+     height: 650px; 
+ }
+
+ /* Lista di recensioni in riquadro con stile differenziato */
+ .recensioni-riquadro ul {
+     list-style: none;
+     padding-left: 0;
+     color:#2a4d69;
+     margin: 0;
+ 	
+ }
+
+ .recensioni-riquadro ul li {
+     background-color: #dacfaf;
+     border-left: 5px solid #2a4d69;
+     box-shadow: 0 1px 3px rgba(82, 57, 28, 0.2);
+     font-style: normal;
+     padding: 5px 18px;
+     margin-bottom: 13px;
+     border-radius: 6px;
+     transition: background-color 0.3s ease;
+ 	line-height: 1.1;
+ 	
+ }
+
+ .recensioni-riquadro ul li:hover {
+     background-color: #aac4e6;
+     cursor: default;
+ }
+
+ /* Label che funge da pulsante */
+ .expand-label {
+     display: block;
+     margin: 15px auto 0 auto;
+     padding: 8px 20px;
+     background-color: #aac4e6;
+     color: white;
+     border-radius: 5px;
+     cursor: pointer;
+     font-size: 14px;
+     transition: all 0.3s ease;
+     min-width: 140px;
+     text-align: center;
+     user-select: none;
+ }
+
+ .expand-label:hover {
+     background-color: #2a4d69;
+     transform: translateY(-1px);
+ }
+
+ /* Icone e testo che cambiano */
+ .expand-label::before {
+     content: "▼ ";
+ }
+
+ .expand-label::after {
+     content: "Espandi vista";
+ }
+
+ /* Quando è espanso */
+ .expand-toggle:checked + .recensioni-riquadro + .expand-label::before {
+     content: "▲ ";
+ }
+
+ .expand-toggle:checked + .recensioni-riquadro + .expand-label::after {
+     content: "Contrai vista";
+ }
+
+ /* Il resto del CSS per recensioni rimane uguale... */
+ .recensioni-riquadro ul {
+     list-style: none;
+     padding-left: 0;
+     color: #2a4d69;
+     margin: 0;
+ }
+
+ .recensioni-riquadro ul li {
+     background-color: #dbe9f4;
+     border-left: 5px solid #2a4d69;
+     box-shadow: 0 1px 3px rgba(82, 57, 28, 0.2);
+     font-style: normal;
+     padding: 5px 18px;
+     margin-bottom: 13px;
+     border-radius: 6px;
+     transition: background-color 0.3s ease;
+     line-height: 1.1;
+ }
+
+ .recensioni-riquadro ul li:hover {
+     background-color: #aac4e6;
+     cursor: default;
+ }
+
+ 
+ /* stileImmagineBrano.css *
+ .foto img {
+   max-width: 350px;
+   max-height: 350px;
+   object-fit: cover;
+   border-radius: 10px;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+   display: block;
+   margin: 20px auto;
+ }
+*/
+
+.foto{
+	margin-top: 150px;
+	border-radius: 10px;
+	align-items: center;
+	position:relative;
+	line-height: 0;
+	
+	/*flex:1;*/	
+	overflow: hidden;
+	margin-left:200px;
+	margin-right:100px;
+	display:flex;
+	width:600px;
+	height: 600px;
+	margin-bottom: 150px;
+}
+
+.foto img{
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	border-radius: 10px;
+	display:block;
+	
+}
+.testo {
+  white-space: pre-wrap;  /* preserva i ritorni a capo ma consente l'andare a capo automatico */
+  word-wrap: break-word;  /* spezza le parole troppo lunghe se necessario */
+  overflow-wrap: break-word;
+}
+
+
 
 @media (max-width: 768px) {
   ul.book-list li, ul.author-list li {

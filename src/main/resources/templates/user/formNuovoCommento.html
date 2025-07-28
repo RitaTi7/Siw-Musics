@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nuovo commento</title>
+		<link rel="stylesheet" href="/css/stile1.css"/>
+		<link rel="stylesheet" href="/css/form.css"/>
+		<link rel="icon" href="piuma.jpg" type="/image/JPG" />
+	</head>
+	
+	<body>
+		<header>
+			<div class="logo"><a href="/"><img src="/images/piuma.jpg" width="2%"/></a> SIW Music</div>
+			<nav>
+				<span th:if="${userDetails}">
+					<span th:text="${userDetails.username}"></span>
+					<a th:href="@{/logout}"><button>Logout</button></a>
+				</span>
+				<span th:unless="${userDetails}">
+					<a th:href="@{/login}"><button>Login</button></a>
+				</span>
+			</nav>
+		</header>		
+		
+		<form th:action="@{'/user/commento/' + ${brano.id}}" method="POST" th:object="${commento}">
+			
+			<h1>Scrivi un commento</h1>
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
+			
+			<div>
+				<label>Titolo:</label>
+				<span><input type="text" th:field="${commento.titolo}"></span>
+				<span th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}"></span>
+			</div>
+			<div>
+				<label>Testo:</label>
+				<span><textarea th:field="${commento.testo}"  cols="50" placeholder="Scrivi qui il tuo commento..."></textarea></span>
+				<span th:if="${#fields.hasErrors('testo')}" th:errors="*{testo}"></span>
+			</div>
+			
+			<div>
+				<span><button type="submit">Conferma</button></span>
+				<a th:href="@{'/brano/' + ${brano.id}}"><button type="button">Annulla</button></a>
+			</div>
+		</form>
+		<footer>
+			&copy; 2025 Siw Music
+		</footer>
+
+	</body>
+</html>

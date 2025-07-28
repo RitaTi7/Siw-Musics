@@ -43,7 +43,7 @@ public class Brano {
 	@NotNull
 	private Integer durataMinuti;
 	
-	@Column(length=2000)
+	@Column(length=5000)
 	@Size(max=2000, message="la lunghezza del testo non può superare i 2000 caratteri")
 	private String testo;
 	
