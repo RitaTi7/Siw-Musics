@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
+import it.uniroma3.siw.SiwMusicsApplication;
 import it.uniroma3.siw.model.Autore;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Brano;
@@ -37,10 +37,16 @@ import jakarta.validation.Valid;
 
 @Controller
 public class BranoController {
+
+    private final SiwMusicsApplication siwMusicsApplication;
 	
 	@Autowired BranoService branoService;
 	@Autowired AutoreService autoreService;
 	@Autowired CredentialsService credentialsService;
+
+    BranoController(SiwMusicsApplication siwMusicsApplication) {
+        this.siwMusicsApplication = siwMusicsApplication;
+    }
 	
 	@GetMapping("/brano/{id}")
 	public String mostraBrano(@PathVariable("id") Long id, Model model) {
@@ -48,7 +54,7 @@ public class BranoController {
 		Set<Autore> autori= brano.getAutori();
 		List<Commento> commenti= brano.getCommenti();
 		
-		Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+		Authentication authentication= SecurityContextHolder.getContext().getAuthentication();		//per attivare i tasti di modifica
 		
 		if(!(authentication instanceof AnonymousAuthenticationToken)) {
 			UserDetails userDetails= (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -78,7 +84,7 @@ public class BranoController {
 	
 	
 	@PostMapping("/admin/brano")
-	public String nuovoBrano(@RequestParam("fileImmagini") List<MultipartFile> immagini,
+	public String nuovoBrano(@RequestParam("fileImmagini") MultipartFile fileImmagine,
 			@Valid @ModelAttribute("brano") Brano brano, BindingResult bindingResult, Model model) throws IOException {
 		if(bindingResult.hasErrors()) {
 //			System.out.println("Errore nel binding: " + bindingResult.getAllErrors());
@@ -86,24 +92,19 @@ public class BranoController {
 		}
 		else {
 			this.branoService.save(brano);
-			String uploadDir = "uploads/images/";
-			Files.createDirectories(Paths.get(uploadDir));
-			
-			for (MultipartFile file : immagini) {
-	            if (!file.isEmpty()) {
-	                // Nome originale (potresti volerlo modificare per evitare conflitti)
-	               // String fileName = file.getOriginalFilename();
-	                String fileName = brano.getId() + "_"+ file.getOriginalFilename();
-	                
-	                // Salva fisicamente il file
-	                Path filePath = Paths.get(uploadDir, fileName);
-	                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-	                System.out.println("Salvo immagine in: " + filePath.toAbsolutePath());
-	                
-	                brano.getImmagini().add(fileName);
-	            }
+			if (fileImmagine != null && !fileImmagine.isEmpty()) {
+		        String uploadDir = "uploads/images/";
+		        Files.createDirectories(Paths.get(uploadDir));
+
+		        String fileName = brano.getId() + "_" + fileImmagine.getOriginalFilename();
+		        Path filePath = Paths.get(uploadDir, fileName);
+		        Files.copy(fileImmagine.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+		        System.out.println("Salvo immagine in: " + filePath.toAbsolutePath());
+
+		        brano.setImmagine(fileName);
+		        this.branoService.save(brano); // Secondo salvataggio per aggiornare con immagine
 	        }
-			this.branoService.save(brano);
+			
 			return "redirect:/brano/" + brano.getId();
 		}
 	}
@@ -131,42 +132,43 @@ public class BranoController {
 	
 	@PostMapping("/admin/modificaBrano/{id}")
 	public String modificaBrano(@PathVariable("id") Long id, @Valid @ModelAttribute("brano") Brano branoModificato, 
-			BindingResult bindingResult, @RequestParam(value = "fileImmagini", required = false) List<MultipartFile> immaginiNuove,
-		    @RequestParam(value = "immaginiDaRimuovere", required = false) List<String> immaginiDaRimuovere, Model model) throws IOException{
-		if(bindingResult.hasErrors())
+			BindingResult bindingResult, @RequestParam("fileImmagine") MultipartFile immagine, Model model) throws IOException{
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("brano", this.branoService.getBranoById(id));
 			return "admin/formModificaBrano.html";
+		}
 		else {
 			Brano branoEsistente= this.branoService.getBranoById(id);
 			branoEsistente.setTitolo(branoModificato.getTitolo());
 			branoEsistente.setAnno(branoModificato.getAnno());
+			branoEsistente.setGenere(branoModificato.getGenere());
+			branoEsistente.setDurataMinuti(branoModificato.getDurataMinuti());
+			branoEsistente.setTesto(branoModificato.getTesto());
+			branoEsistente.setAlbum(branoModificato.getAlbum());
 			
-			if(immaginiDaRimuovere != null) {
-		        for(String imgName : immaginiDaRimuovere) {
-		            branoEsistente.getImmagini().remove(imgName);
-		            
-		            // Opzionale: elimina il file dal filesystem
-		            Path filePath = Paths.get("uploads/images/", imgName);
-		            Files.deleteIfExists(filePath);
-		        }
-		    }
 			
-			if(immaginiNuove != null) {
-		        String uploadDir = "uploads/images/";
-		        Files.createDirectories(Paths.get(uploadDir));
-
-		        for(MultipartFile file : immaginiNuove) {
-		            if(!file.isEmpty()) {
-		                String fileName = branoEsistente.getId() + "_" + file.getOriginalFilename();
-		                Path filePath = Paths.get(uploadDir, fileName);
-		                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-		                branoEsistente.getImmagini().add(fileName);
-		            }
-		        }
-		    }
+			
+			if (immagine != null && !immagine.isEmpty()) {
+	            String uploadDir = "uploads/images/";
+	            Files.createDirectories(Paths.get(uploadDir));
+	            
+	            
+	            if (branoEsistente.getImmagine() != null && !branoEsistente.getImmagine().isEmpty()) {
+	                Path oldFilePath = Paths.get(uploadDir, branoEsistente.getImmagine());
+	                Files.deleteIfExists(oldFilePath);
+	            }
+	            String fileName = id + "_" + immagine.getOriginalFilename();
+	            Path filePath = Paths.get(uploadDir, fileName);
+	            Files.copy(immagine.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+	            branoEsistente.setImmagine(fileName);
+			}
+		 
 			this.branoService.save(branoEsistente);
 			model.addAttribute("brani", this.branoService.getAllBrani());
+		
 			return "admin/aggiornaBrani.html";
 		}
+		
 	}
 	
 	@GetMapping("/admin/modificaAutoriDiBrano/{id}")

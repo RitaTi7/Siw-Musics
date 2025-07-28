@@ -50,7 +50,7 @@ public class CommentoController {
 			Credentials credentials= this.credentialsService.getCredentials(userDetails.getUsername());
 			User user= credentials.getUser();
 			
-//			commento.setUsernameUtente(credentials.getUsername());
+			commento.setUsernameUtente(credentials.getUsername());
 			commento.setUser(user);
 			user.getCommenti().add(commento);
 			

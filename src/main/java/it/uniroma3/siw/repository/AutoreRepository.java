@@ -9,6 +9,6 @@ import it.uniroma3.siw.model.Autore;
 public interface AutoreRepository extends CrudRepository<Autore, Long> {
 	
 	
-	@Query(value= "SELECT* FROM autore a WHERE a.id NOT IN (SELECT autori_id FROM libro_autori WHERE libro_autori.libri_id = :libroId)", nativeQuery=true)
-	public Iterable<Autore> findAutoriNonInBrano(@Param("libroId") Long id);
+	@Query(value= "SELECT* FROM autore a WHERE a.id NOT IN (SELECT autori_id FROM brano_autori WHERE brano_autori.brani_id = :branoId)", nativeQuery=true)
+	public Iterable<Autore> findAutoriNonInBrano(@Param("branoId") Long id);
 }

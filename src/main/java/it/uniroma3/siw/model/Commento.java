@@ -20,19 +20,15 @@ public class Commento {
 	private Long id;
 	
 	@NotBlank
-	private String titolo;
+	private String titolo;	
 	
-	@NotNull
-	@Min(1)
-	@Max(5)
-	private Integer voto;
-	
+	@NotBlank
 	@Column(length=2000)
 	@Size(max=2000, message="Il commento non può superare i 2000 caratteri")
 	private String testo;			//cambia i vincoli di colonna ( varying 255 sono pochi)
 	
-//	@Transient
-//	private String usernameUtente;
+	@NotBlank
+	private String usernameUtente;
 	
 	@ManyToOne
 	private Brano brano;
@@ -47,9 +43,6 @@ public class Commento {
 	public String getTitolo() {
 		return titolo;
 	}
-	public Integer getVoto() {
-		return voto;
-	}
 	public String getTesto() {
 		return testo;
 	}
@@ -59,15 +52,15 @@ public class Commento {
 	public User getUser() {
 		return user;
 	}
+	public String getUsernameUtente() {
+		return usernameUtente;
+	}
 	
 	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
-	}
-	public void setVoto(Integer voto) {
-		this.voto = voto;
 	}
 	public void setTesto(String testo) {
 		this.testo = testo;
@@ -78,6 +71,9 @@ public class Commento {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public void setUsernameUtente(String usernameUtente) {
+		this.usernameUtente = usernameUtente;
+	}
 	
 	
 	@Override
@@ -85,13 +81,13 @@ public class Commento {
 		if(obj==null || obj.getClass()!=this.getClass())
 			return false;
 		
-		Commento r= (Commento) obj;
+		Commento c= (Commento) obj;
 		
-		return r.getTitolo().equals(this.getTitolo()) && r.getVoto().equals(this.getVoto()) && r.getTesto().equals(this.getTesto());
+		return c.getTitolo().equals(this.getTitolo()) && c.getTesto().equals(this.getTesto()) && c.getUsernameUtente().equals(this.getUsernameUtente());
 	}
 	
 	@Override
 	public int hashCode() {
-		return this.getClass().hashCode()+this.getTitolo().hashCode()+this.getVoto()+this.getTesto().hashCode();
+		return this.getClass().hashCode()+this.getTitolo().hashCode()+this.getTesto().hashCode() + this.getUsernameUtente().hashCode();
 	}
 }

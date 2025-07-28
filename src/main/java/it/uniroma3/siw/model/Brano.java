@@ -1,5 +1,6 @@
 package it.uniroma3.siw.model;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,12 +34,15 @@ public class Brano {
 	@Max(2025)
 	private Integer anno;
 	
-//	@NotBlank
-//	@Column(length= 500)
-//	private String trama;	//TODO
-//	
-//	@NotBlank
-//	private String genere;	//TODO
+	@NotBlank
+	private String genere;
+	
+	private String album;
+	
+	@NotNull
+	private Integer durataMinuti;
+	
+	private String testo;
 	
 	@ManyToMany
 	private Set<Autore> autori;
@@ -46,12 +50,8 @@ public class Brano {
 	@OneToMany(mappedBy="brano", cascade={CascadeType.REMOVE})
 	private List<Commento> commenti;
 	
-	@ElementCollection
-	List<String> immagini = new ArrayList<>();
+	private String immagine;
 	
-	//collana			//TODO
-	//genere
-	//casa editrice??
 	
 	
 	public Long getId() {
@@ -63,17 +63,26 @@ public class Brano {
 	public Integer getAnno() {
 		return anno;
 	}
-//	public String getTrama() {
-//		return trama;
-//	}
+	public String getGenere() {
+		return genere;
+	}
+	public String getAlbum() {
+		return album;
+	}
+	public Integer getDurataMinuti() {
+		return durataMinuti;
+	}
+	public String getTesto() {
+		return testo;
+	}
 	public Set<Autore> getAutori() {
 		return autori;
 	}
 	public List<Commento> getCommenti() {
 		return commenti;
 	}
-	public List<String> getImmagini() {
-		return immagini;
+	public String getImmagine() {
+		return immagine;
 	}
 	
 	public void setId(Long id) {
@@ -85,33 +94,58 @@ public class Brano {
 	public void setAnno(Integer anno) {
 		this.anno = anno;
 	}
-//	public void setTrama(String trama) {
-//		this.trama = trama;
-//	}
+	public void setGenere(String genere) {
+		this.genere = genere;
+	}
+	public void setAlbum(String album) {
+		this.album = album;
+	}
+	public void setDurataMinuti(Integer durataMinuti) {
+		this.durataMinuti = durataMinuti;
+	}
+	public void setTesto(String testo) {
+		this.testo = testo;
+	}
 	public void setAutori(Set<Autore> autori) {
 		this.autori = autori;
 	}
 	public void setCommenti(List<Commento> commenti) {
 		this.commenti = commenti;
 	}
-	public void setImmagini(List<String> immagini) {
-		this.immagini = immagini;
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
 	}
+	
 	
 
 	@Override
-	public boolean equals(Object obj) {
-		if(obj==null || obj.getClass()!=this.getClass())
-			return false;
-		
-		Brano l= (Brano) obj;
-		
-		return l.getTitolo().equals(this.getTitolo()) && l.getAnno().equals(this.getAnno());
+	public boolean equals(Object o) {
+		if (this == o) return true;
+	    if (o == null || getClass() != o.getClass()) return false;
+
+	    Brano brano = (Brano) o;
+
+	    if (!titolo.equalsIgnoreCase(brano.titolo)) return false;
+	    if (!anno.equals(brano.anno)) return false;
+	    if (!genere.equalsIgnoreCase(brano.genere)) return false;
+	    if (album != null ? !album.equalsIgnoreCase(brano.album) : brano.album != null) return false;
+	    if (!durataMinuti.equals(brano.durataMinuti)) return false;
+	    if (testo != null ? !testo.equals(brano.testo) : brano.testo != null) return false;
+	    if (autori != null ? !autori.equals(brano.autori) : brano.autori != null) return false;
+
+	    return true;
 	}
 	
 	
 	@Override
 	public int hashCode() {
-		return this.getClass().hashCode()+ this.getTitolo().hashCode()+ this.getAnno();
+		int result = titolo.toLowerCase().hashCode();
+	    result = 31 * result + anno.hashCode();
+	    result = 31 * result + genere.toLowerCase().hashCode();
+	    result = 31 * result + (album != null ? album.toLowerCase().hashCode() : 0);
+	    result = 31 * result + durataMinuti.hashCode();
+	    result = 31 * result + (testo != null ? testo.hashCode() : 0);
+	    result = 31 * result + (autori != null ? autori.hashCode() : 0);
+	    return result;
 	}
 }
