@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Registrazione conclusa</title>
+	<link rel="stylesheet" href="/css/stile1.css" />
+	<link rel="stylesheet" href="/css/form.css"/>
+	<link rel="icon" href="/images/piuma.jpg" type="/image/JPG" />
+</head>
+
+<body>
+	<header>
+		<div class="logo"><a href="/"><img src="/images/piuma.jpg" width="2%"/></a> SIW Music</div>
+		<nav>
+			<a th:href="@{/}"><button>Home</button></a>
+			<span th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a th:href="@{/logout}"><button>Logout</button></a>
+			</span>
+			<span th:unless="${userDetails}">
+				<a th:href="@{/login}"><button>Login</button></a>
+			</span>
+		</nav>
+	</header>
+	
+	<!--<div>
+		<a href="/"><img src="/images/logo-siw.png" width="50%"/></a>
+	</div>-->
+	<div style="
+		margin: 40px auto;
+	  	background-color: rgba(255, 246, 234, 0.9);
+		border-radius: 10px;
+		box-shadow: 0 2px 8px rgba(110, 71, 23, 0.12);
+		padding: 30px 40px;
+		max-width: 600px;
+		text-align: center;
+		font-family: Georgia, serif;
+		color: #4b3b2b;">
+		<h1 style="margin-top: 0;">Congratulazioni ti sei registrato!</h1>
+		<div>
+			<span>Nome: </span>
+			<span th:text="${user.name}"></span>
+		</div>
+		<div>
+			<span>Cognome: </span>
+			<span th:text="${user.surname}"></span>
+		</div>
+		<div>
+			<span>Email: </span>
+			<span th:text="${user.email}"></span>
+		</div>
+	</div>
+
+</body>
+</html>

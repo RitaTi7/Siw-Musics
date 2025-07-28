@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+
+	<head>
+	    <title>Login</title>
+		<link rel="stylesheet" href="/css/stile1.css" />
+		<link rel="stylesheet" href="/css/form.css"/>
+		<link rel="icon" href="/images/piuma.jpg" type="/image/JPG" />
+	</head>
+
+<body>
+	<header>
+		<div class="logo"><a href="/"><img src="/images/piuma.jpg" width="2%"/></a> SIW Music</div>
+		<nav>
+			<span th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a th:href="@{/logout}"><button>Logout</button></a>
+			</span>
+			<span th:unless="${userDetails}">
+				<a th:href="@{/login}"><button>Login</button></a>
+			</span>
+		</nav>
+	</header>
+
+	<!--<div>
+		<a href="/"><img src="/images/logo-siw.png" width="50%"/></a>
+	</div>-->
+	<form th:action="@{/login}" method="POST">
+		<h1>Login</h1>
+			<div>
+				<span>Username:</span>
+				<span><input name="username" type="text" required /></span>
+			</div>
+			<div>
+				<span>Password:</span>
+				<span><input name="password" type="password" required /></span>
+			</div>
+			<div>
+				<span th:if="${param.error != null}" style="color: red;">Username o password errati</span>
+			</div>
+			<div>
+				<span><button type="submit">Login</button></span>
+				<a th:href="@{/register}"><button type="button">Registrati</button></a>
+			</div>
+	</form>
+	
+	<footer>
+		&copy; 2025 Siw Music
+	</footer>
+	
+</body>
+
+</html>
