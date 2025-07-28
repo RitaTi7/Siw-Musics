@@ -45,7 +45,7 @@
 
     <section class="evidenza">
       <h2>Autori in evidenza</h2>
-      <ul class="author-list">
+      <ul class="author-list" th:if="${ultimiAutori}">
         <li th:each="autore : ${ultimiAutori}">
           <strong th:text="${autore.nomeArte}">Italo Calvino</strong>
         </li>
