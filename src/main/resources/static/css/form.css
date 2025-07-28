@@ -1,0 +1,90 @@
+form {
+  background-color: rgba(255, 255, 255, 0.95); /* bianco semitrasparente */
+  padding: 40px;
+  border: 1px solid #c5d9f1;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 100px auto;
+  font-family: var(--font-family);
+  color: #1b2a40;
+  border-radius: 0;
+}
+
+form h1 {
+  text-align: center;
+  color: #1b3c74;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+form div {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+form span {
+  width: 100%;
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #a5c1e0;
+  border-radius: 0;
+  background-color: #f9fcff;
+  color: #1b2a40;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+  border-color: #5390d9;
+  box-shadow: 0 0 6px rgba(83, 144, 217, 0.5);
+  outline: none;
+}
+
+form button,
+form input[type="submit"] {
+  background-color: #1b3c74;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: var(--font-family);
+  margin: 0 12px;
+  border-radius: 0;
+}
+
+form button:hover,
+form input[type="submit"]:hover {
+  background-color: #2c5aa0;
+}
+
+form textarea {
+  resize: none;
+  min-height: 150px;
+  line-height: 1.4;
+}
+
+form input:invalid {
+  color: #d32f2f; /* rosso per errori */
+}
+
+form div span[style*="color: red"] {
+  color: #d32f2f;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+}

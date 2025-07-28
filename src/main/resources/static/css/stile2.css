@@ -1,0 +1,175 @@
+:root {
+  --color-bg: #f9fbfd;
+  --color-text: #1c2a40;
+  --color-primary: #2c60d8;
+  --color-primary-dark: #1e3c8e;
+  --color-link: #2c60d8;
+  --color-link-hover: #163a74;
+  --font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:link, a:visited {
+  color: var(--color-primary-dark);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+#main {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: rgb(255, 255, 255, 0.8);
+  border: 1px solid #dce3ec;
+  box-shadow: 0 4px 12px rgba(44, 96, 216, 0.08);
+  text-align: center;
+}
+
+.home-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border: 1px solid #ccd6e4;
+  margin-top: 20px;
+}
+
+.intro-text {
+  margin-top: 25px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--color-primary-dark);
+}
+
+section.evidenza {
+  margin-top: 40px;
+  text-align: left;
+}
+
+section.evidenza h2 {
+  color: var(--color-primary-dark);
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 6px;
+  margin-bottom: 15px;
+}
+
+ul.book-list, ul.author-list {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+ul.book-list li, ul.author-list li {
+  background-color: #eef2fa;
+  padding: 12px 16px;
+  border: 1px solid #d0daeb;
+  flex: 1 1 calc(33% - 20px);
+  min-width: 200px;
+  font-weight: 500;
+  transition:  0.3s ease;
+}
+
+ul.book-list li:hover, ul.author-list li:hover {
+  background-color: #dfe8f8;
+}
+
+ul.book-list li strong, ul.author-list li strong {
+  color: var(--color-primary-dark);
+  font-size: 1.1rem;
+  display: block;
+}
+
+.container {
+  width: 600px;
+  margin: 30px auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(26, 42, 71, 0.12);
+  padding: 30px 20px;
+  flex: 1;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.container-obj {
+  flex: 1;
+  margin-left: 40px;
+  margin-top: 40px;
+  min-height: 400px;
+  max-width: 700px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(26, 42, 71, 0.12);
+  padding: 20px 40px;
+  margin-bottom: 66px;
+  position: relative;
+}
+
+ul.elem {
+  list-style: none;
+  padding: 0;
+}
+
+ul.elem li {
+  background-color: #dbe9f4;
+  margin-bottom: 12px;
+  padding: 18px 16px;
+  border-left: 7px solid #2a4d69;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(26, 42, 71, 0.09);
+  transition: background 0.25s;
+}
+
+ul.elem li:hover {
+  background-color: #aac4e6;
+}
+
+.titolo {
+  font-weight: bold;
+  color: #1b3559;
+  font-size: 1.1em;
+}
+
+.cliccabile {
+  color: var(--color-link);
+  font-style: italic;
+  margin-bottom: 3px;
+  display: block;
+}
+
+.cliccabile:hover {
+  color: var(--color-link-hover);
+}
+
+.importante {
+  font-weight: 600;
+  color: #2a4d69;
+  margin-bottom: 15px;
+}
+
+.recensioni {
+  background-color: rgba(214, 227, 247, 0.9);
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(42, 77, 105, 0.2);
+  max-width: 93%;
+  margin-l
+
+@media (max-width: 768px) {
+  ul.book-list li, ul.author-list li {
+    flex: 1 1 100%;
+  }
+
+  nav button {
+    font-size: 0.
