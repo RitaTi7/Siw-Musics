@@ -13,7 +13,7 @@
 		<div class="logo"><img src="/images/piuma.jpg" width="2%"/> SIW Music</div>
 	    <nav>
 		  <a th:href="@{/}"><button>Home</button></a>
-	      <a th:href="@{/libro}"><button>Libri</button></a>
+	      <a th:href="@{/brano}"><button>Brani</button></a>
 	      <a th:href="@{/autore}"><button>Autori</button></a>
 		  <span th:if="${userDetails}">
 		  	<span th:text="${userDetails.username}"></span>
@@ -32,11 +32,11 @@
 	      alt="Immagine musica" 
 	      class="home-image"/>
 	    <p class="intro-text">
-	      Benvenuto nella nostra biblioteca digitale. Scopri i libri più amati, gli autori di rilievo e molto altro.
+	      Benvenuto nella nostra raccolta musicale!! Divertiti a consultare brani e condividere idee con gli altri!
 	    </p>
 	
 	    <section class="evidenza">
-	      <h2>Libri in evidenza</h2>
+	      <h2>Brani in evidenza</h2>
 	      <ul class="book-list">
 	        <li>
 	          <strong>Il nome della rosa</strong>

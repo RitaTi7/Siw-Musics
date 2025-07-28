@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nuovo Autore</title>
+		<link rel="stylesheet" href="/css/stile1.css"/>
+		<link rel="stylesheet" href="/css/form.css"/>
+		<link rel="icon" href="/images/piuma.jpg" type="/image/JPG"/>		
+
+	</head>
+	
+	<body>
+		<header>
+			<div class="logo"><a href="/"><img src="/images/piuma.jpg" width="2%"/></a> SIW Music</div>
+			<nav>
+				<span th:if="${userDetails}">
+					<span th:text="${userDetails.username}"></span>
+					<a th:href="@{/logout}"><button>Logout</button></a>
+				</span>
+				<span th:unless="${userDetails}">
+					<a th:href="@{/login}"><button>Login</button></a>
+				</span>
+			</nav>
+		</header>
+						
+
+		<form th:action="@{/admin/autore}" method="POST" th:object="${autore}" enctype="multipart/form-data">
+			<h1>Aggiungi un autore</h1>
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p th:each="err: ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
+			<div>
+				<label>Nome d'arte:</label>
+				<span><input type="text" th:field="${autore.nomeArte}"/></span>
+				<span th:if="${#fields.hasErrors('nomeArte')}" th:errors="*{nomeArte}"></span>
+			</div>
+			
+			<div>
+				<label>Nome:</label>
+				<span><input type="text" th:field="${autore.nome}"/></span>
+				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+			</div>
+			<div>
+				<label>Cognome:</label>
+				<span><input type="text" th:field="${autore.cognome}"/></span>
+				<span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
+			</div>
+			<div>
+				<label>Data di nascita:</label>
+				<span><input type="date" th:field="${autore.dataNascita}"/></span>
+				<span th:if="${#fields.hasErrors('dataNascita')}" th:errors="*{dataNascita}"></span>
+			</div>
+			<div>
+				<label>Data di morte:</label>
+				<span><input type="date" th:field="${autore.dataMorte}"/></span>
+				<span th:if="${#fields.hasErrors('dataMorte')}" th:errors="*{dataMorte}"></span>
+			</div>
+			<div>
+				<label>Nazionalità:</label>
+				<span><input type="text" th:field="${autore.nazionalita}"/></span>
+				<span th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}"></span>
+			</div>
+			<div>
+		        <label>Carica immagine:</label>
+		        <input type="file" name="fileImmagine" accept="image/*"/>
+		    </div>
+			
+			<div>
+				<span><button type="submit">Conferma</button></span>
+				<span><a th:href="@{/admin/aggiornaAutori}"><button type="button">Annulla</button></a></span>
+			</div>
+		</form>
+		
+		<footer>
+			&copy; 2025 Siw Books
+		</footer>		
+	</body>
+</html>

@@ -27,6 +27,9 @@ public class Autore {
 	@NotBlank
 	private String cognome;
 	
+	@NotBlank
+	private String nomeArte;
+	
 	@NotNull
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
 	@Past
@@ -56,6 +59,9 @@ public class Autore {
 	public String getCognome() {
 		return cognome;
 	}
+	public String getNomeArte() {
+		return nomeArte;
+	}
 	public LocalDate getDataNascita() {
 		return dataNascita;
 	}
@@ -81,6 +87,9 @@ public class Autore {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
+	public void setNomeArte(String nomeArte) {
+		this.nomeArte = nomeArte;
+	}
 	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
@@ -105,12 +114,12 @@ public class Autore {
 		
 		Autore a= (Autore) obj;
 		
-		return a.getNome().equals(this.getNome()) && a.getCognome().equals(this.getCognome()) && a.getDataNascita().equals(this.getDataNascita()) && a.getNazionalita().equals(this.getNazionalita());
+		return a.getNome().equals(this.getNome()) && a.getCognome().equals(this.getCognome()) && a.getDataNascita().equals(this.getDataNascita()) && a.getNazionalita().equals(this.getNazionalita()) && a.getNomeArte().equals(this.getNomeArte());
 	}
 	
 	@Override
 	public int hashCode() {
-		return this.getClass().hashCode()+this.getNome().hashCode()+this.getCognome().hashCode()+this.getDataNascita().hashCode()+this.getNazionalita().hashCode();
+		return this.getClass().hashCode()+this.getNome().hashCode()+this.getCognome().hashCode()+this.getDataNascita().hashCode()+this.getNazionalita().hashCode() + this.getNomeArte().hashCode();
 	}
 
 }

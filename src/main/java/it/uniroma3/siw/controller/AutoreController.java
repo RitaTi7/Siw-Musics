@@ -119,6 +119,7 @@ public class AutoreController {
 			autoreEsistente.setDataNascita(autoreModificato.getDataNascita());
 			autoreEsistente.setDataMorte(autoreModificato.getDataMorte());
 			autoreEsistente.setNazionalita(autoreModificato.getNazionalita());
+			autoreEsistente.setNomeArte(autoreModificato.getNomeArte());
 			
 			 if (immagine != null && !immagine.isEmpty()) {
 		            String uploadDir = "uploads/images/";

@@ -1,0 +1,2 @@
+INSERT INTO users(id, name, surname, email) VALUES (1, 'Rita', 'Tiani', 'rita@gmail.com');
+INSERT INTO credentials(id, username, password, role, user_id) VALUES (1, 'admin', '$2a$12$9tpLJAnbL.jvjNuO7jLKh./DftjSK57czenu9MpMkwTytDEdoG.rS', 'ADMIN', 1);

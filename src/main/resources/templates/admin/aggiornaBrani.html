@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Brani</title>
+		<link rel="stylesheet" href="/css/stile1.css" />
+		<link rel="stylesheet" href="/css/stile2.css"/>
+		<link rel="stylesheet" href="/css/stile3.css"/>
+		<link rel="icon" href="piuma.jpg" type="/image/JPG" />
+    </head>	
+	
+    <body>
+		<header>
+			<div class="logo"><img src="/images/piuma.jpg" width="2%"/> SIW Music</div>
+		  <nav>
+			<a th:href="@{/}"><button>Home</button></a>
+			<a th:href="@{/brano}"><button>Brani</button></a>
+			<a th:href="@{/autore}"><button>Autori</button></a>
+			<span th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a th:href="@{/logout}"><button>Logout</button></a>
+			</span>
+			<span th:unless="${userDetails}">
+				<a th:href="@{/login}"><button>Login</button></a>
+			</span>
+		  </nav>
+		</header>
+		
+        <div class="container">
+          <h1>Elenco dei brani</h1>
+          <div class="elenco">
+            <div th:if="${brani.isEmpty()}">Non sono presenti brani</div>
+            <div th:unless="${brani.isEmpty()}">
+				<ul class="elem">
+	                <li th:each="brano: ${brani}">
+	                    <span class="titolo" th:text="${brano.titolo} + ' (' + ${brano.anno} + ')'">titolo (2003)</span>
+						<span class="settings2" sec:authorize="hasAuthority('ADMIN')">
+							<a th:href="@{'/admin/eliminaBrano/' + ${brano.id}}"><button type="button">Rimuovi</button></a>
+							<a th:href="@{'/brano/' + ${brano.id}}"><button type="button">Modifica</button></a>
+						</span><br>						
+						<span class="autore" th:if="${brano.autori}" th:each="autore, iterStat : ${brano.autori}">
+							<span th:text="|${autore.nome} ${autore.cognome}|"></span><span th:if="${!iterStat.last}">, </span>
+						</span>
+	                </li>
+	            </ul>
+			</div>
+          </div>
+		  <div class="settings1"  sec:authorize="hasAuthority('ADMIN')">
+			<span><a th:href="@{/brano}"><button type="button">Fine</button></a></span>
+			<span><a th:href="@{/admin/formNuovoBrano}"><button type="button">Nuovo brano</button></a></span>
+		  </div>
+	  </div>
+	  
+	  <footer>
+	  	&copy; 2025 Siw Music
+	  </footer>
+	</body>
+</html>
+	
+	
+	
+
+	
+	

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Autore</title>
+		<link rel="stylesheet" href="/css/stile1.css" />
+        <link rel="stylesheet" href="/css/stile2.css"/>
+		<link rel="stylesheet" href="/css/stile3.css"/>		
+		<link rel="icon" href="/images/piuma.jpg" type="/image/JPG" />
+    </head>
+
+    <body>
+		
+		<header>
+			<div class="logo"><img src="/images/piuma.jpg" width="2%"/> SIW Books</div>
+			<nav>
+				<a th:href="@{/}"><button>Home</button></a>
+				<a th:href="@{/brano}"><button>Brani</button></a>
+				<a th:href="@{/autore}"><button>Autori</button></a>
+				<span th:if="${userDetails}">
+					<span th:text="${userDetails.username}"></span>
+					<a th:href="@{/logout}"><button>Logout</button></a>
+				</span>
+				<span th:unless="${userDetails}">
+					<a th:href="@{/login}"><button>Login</button></a>
+				</span>
+			</nav>
+		</header>
+		
+		<div style="display: flex; flex:1;">
+	    	<div class="container-obj" th:if="${autore}">
+	        	<h1 th:text="${autore.NomeArte + ' (' + autore.nome + ' ' + autore.cognome + ')'}">Nome Cognome</h1>
+				<div class="settings3" sec:authorize="hasAuthority('ADMIN')">
+					<a th:href="@{'/admin/formModificaAutore/' + ${autore.id}}"><button type="button">Modifica dati</button></a><br>
+					<span><a th:href="@{'/admin/modificaBraniDiAutore/' + ${autore.id}}" style="margin-top:10px;"><button type="button">Modifica brani</button></a></span><br>
+					<span ><a th:href="@{/admin/aggiornaAutori}"><button type="button">Fine</button></a></span>
+				</div>
+				
+				<p class="importante">Data di nascita: <span th:text="${#temporals.format(autore.dataNascita, 'dd-MM-yyyy')}">1900</span></p>
+				<p class="importante" th:if="${autore.dataMorte}">Data di scomparsa: <span th:text="${#temporals.format(autore.dataMorte, 'dd-MM-yyyy')}"></span></p>
+	        	<p class="importante">Nazionalità: <span th:text="${autore.nazionalita}">Italiana</span></p>
+				<p class="importante">Brani:</p>
+				<div class="cliccabile">
+			  		<span th:if="${brani.isEmpty()}">Non è presente nessun brano</span>
+			  		<span th:unless="${brani.isEmpty()}">
+						<ul>
+							<li th:each="brano: ${brani}">
+								<a th:href="@{'/brano/' + ${brano.id}}" th:text="${brano.titolo} + ' (' + ${brano.anno} + ')'">Titolo (2003)</a>
+							</li>
+						</ul>
+			  		</span>
+				</div>
+				
+				<p class="importante">Trama:</p>
+				<div class="testo">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+				</div>
+			</div>
+			<div class="foto">
+				<img th:src="@{'/images/' + ${autore.immagine}}" alt="Immagine autore"/>
+			</div>
+   		</div>
+		<footer>
+			&copy; 2025 Siw Books
+		</footer>
+    
+    </body>
+</html>

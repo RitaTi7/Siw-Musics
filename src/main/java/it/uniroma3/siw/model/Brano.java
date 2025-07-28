@@ -18,6 +18,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -42,6 +43,8 @@ public class Brano {
 	@NotNull
 	private Integer durataMinuti;
 	
+	@Column(length=2000)
+	@Size(max=2000, message="la lunghezza del testo non può superare i 2000 caratteri")
 	private String testo;
 	
 	@ManyToMany
