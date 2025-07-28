@@ -1,11 +1,13 @@
 package it.uniroma3.siw.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.model.Autore;
+import it.uniroma3.siw.model.Brano;
 import it.uniroma3.siw.repository.AutoreRepository;
 
 @Service
@@ -34,7 +36,11 @@ public class AutoreService {
 	}
 	
 	public Iterable<Autore> findAutoriNonInBrano(Long idBrano){
-		return this.autoreRepository.findAutoriNonInBrano(idBrano);
-		
+		return this.autoreRepository.findAutoriNonInBrano(idBrano);	
 	}
+	
+	public List<Autore> getUltimiAutoriInseriti(int numero){
+		return this.autoreRepository.getUltimiAutoriInseriti(numero);
+	}
+
 }

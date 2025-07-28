@@ -12,7 +12,7 @@
 	<body>
 		
 		<header>
-			<div class="logo"><img src="/images/piuma.jpg" width="2%"/> SIW Books</div>
+			<div class="logo"><img src="/images/piuma.jpg" width="2%"/> SIW Music</div>
 			<nav>
 				<a th:href="@{/}"><button>Home</button></a>
 				<a th:href="@{/brano}"><button>Brani</button></a>
@@ -50,31 +50,13 @@
 					<a th:href="@{'/brano/' + ${brano.id}}"><button type="button">Fine</button></a>
 				</span>
 			</div>
-
-			<div class="carousel-container">
-				<input type="radio" name="carousel" id="slide1" checked>	<!--TODO: arbitrario-->
-				<input type="radio" name="carousel" id="slide2">
-				<input type="radio" name="carousel" id="slide3">
-				<div class="carousel-slide">
-					<img src="https://resizing.flixster.com/uFaQUufZLpd8776iQAujjoOgXJA=/fit-in/705x460/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p13109732_k_v9_aa.jpg" alt="Copertina del brano" />
-				</div>
-				<div class="carousel-slide">
-					<img src="immagine2.jpg" alt="Immagine 2" />
-				</div>
-				<div class="carousel-slide">
-			    	<img src="immagine3.jpg" alt="Immagine 3" />
-				</div>
-
-			  <!-- Pulsanti di navigazione -->
-				<label for="slide1" class="carousel-prev">&#10094;</label>
-				<label for="slide2" class="carousel-next">&#10095;</label>
+			<div class="foto">
+				<img th:src="@{'/images/' + ${brano.immagine}}" alt="Immagine brano"/>
 			</div>
-			
-
-		
+	
 		</div>	
 		<footer>
-			&copy; 2025 Siw Books
+			&copy; 2025 Siw Music
 		</footer>
 
 	</body>

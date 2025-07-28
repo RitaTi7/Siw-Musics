@@ -1,5 +1,6 @@
 package it.uniroma3.siw.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,10 @@ public class BranoService {
 	
 	public Iterable<Brano> findBraniNonInAutore(Long idAutore){
 		return this.branoRepository.findBraniNonInAutore(idAutore);
+	}
+	
+	public List<Brano> getUltimiBraniInseriti(int numero){
+		return this.branoRepository.getUltimiBraniInseriti(numero);
 	}
 	
 }

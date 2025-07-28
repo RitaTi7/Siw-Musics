@@ -11,7 +11,7 @@
 	
     <body>
 		<header>
-			  <div class="logo"><img src="/images/piuma.jpg" width="2%"/> SIW Books</div>
+			  <div class="logo"><img src="/images/piuma.jpg" width="2%"/> SIW Music</div>
 			  <nav>
 				<a th:href="@{/}"><button>Home</button></a>
 				<a th:href="@{/brano}"><button>Brani</button></a>
@@ -36,7 +36,7 @@
 	                    <span class="titolo"><a th:href="@{'/brano'+'/'+ ${brano.id}}" sec:authorize="!hasAuthority('ADMIN')" th:text="${brano.titolo} + ' (' + ${brano.anno} + ')'">titolo (2003)</a></span>
 						<span class="titolo" sec:authorize="hasAuthority('ADMIN')" th:text="${brano.titolo} + ' (' + ${brano.anno} + ')'">titolo (2003)</span><br>
 						<span class="autore" th:if="${brano.autori}" th:each="autore, iterStat : ${brano.autori}">
-							<span th:text="|${autore.nome} ${autore.cognome}|"></span><span th:if="${!iterStat.last}">, </span>
+							<span th:text="${autore.nomeArte}"></span><span th:if="${!iterStat.last}">, </span>
 						</span>
 					</li>
 	            </ul>
@@ -48,7 +48,7 @@
       </div>
 	  
 	  <footer>
-	  	&copy; 2025 Siw Books
+	  	&copy; 2025 Siw Music
 	  </footer>
 	</body>
 </html>

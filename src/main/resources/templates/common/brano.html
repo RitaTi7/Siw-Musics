@@ -35,13 +35,16 @@
 						<span ><a th:href="@{/admin/aggiornaBrani}"><button type="button">Fine</button></a></span>
 					</div>
 		        	<p class="importante">Anno di pubblicazione: <span th:text="${brano.anno}">2003</span></p>
+					<p class="importante">Genere: <span th:text="${brano.genere}">rock</span></p>
+					<p class="importante" th:if="${brano.album}">Album: <span th:text="${brano.album}">2003</span></p>
+					<p class="importante">Durata: <span th:text="${brano.durataMinuti}">2003</span> minuti</p>
 					<p class="importante">Autori:</p>
 					<div class="cliccabile">
 				  		<span th:if="${autori.isEmpty()}">Non è riscontrabile nessun autore</span>
 				  		<span th:unless="${autori.isEmpty()}">
 							<ul >
 								<li th:each="autore: ${autori}">
-									<a th:href="@{'/autore/' + ${autore.id}}" th:text="|${autore.nome} ${autore.cognome}|">Nome Cognome</a>
+									<a th:href="@{'/autore/' + ${autore.id}}" th:text="${autore.nomeArte}">Nome Cognome</a>
 								</li>
 							</ul>
 				  		</span>
